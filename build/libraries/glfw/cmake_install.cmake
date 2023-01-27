@@ -1,4 +1,4 @@
-# Install script for directory: /home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glfw
+# Install script for directory: /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/sreenivas/Desktop/jetpak/Boilerplate2023/build/libraries/glfw/src/cmake_install.cmake")
+  include("/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src/cmake_install.cmake")
 endif()
 

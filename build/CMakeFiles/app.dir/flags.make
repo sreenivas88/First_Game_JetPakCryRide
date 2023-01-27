@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++11
 
 CXX_DEFINES = -DGLFW_INCLUDE_NONE
 
-CXX_INCLUDES = -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/include -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glfw/include -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glad/include -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glm -I/usr/include/freetype2 
+CXX_INCLUDES = -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/include -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/include -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glad/include -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glm -I/usr/include/freetype2 
 

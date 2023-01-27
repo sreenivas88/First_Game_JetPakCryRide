@@ -6,7 +6,7 @@ C_FLAGS = -fPIC   -Wall -std=c99
 
 C_DEFINES = -D_GLFW_USE_CONFIG_H
 
-C_INCLUDES = -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glfw/include -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glfw/src -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/build/libraries/glfw/src 
+C_INCLUDES = -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/include -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src 
 
 # Custom flags: libraries/glfw/src/CMakeFiles/glfw.dir/context.c.o_FLAGS = -Wdeclaration-after-statement
 

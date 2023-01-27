@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glad/src/glad.c" "/home/sreenivas/Desktop/jetpak/Boilerplate2023/build/CMakeFiles/glad.dir/libraries/glad/src/glad.c.o"
+  "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glad/src/glad.c" "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles/glad.dir/libraries/glad/src/glad.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

@@ -6,5 +6,5 @@ C_FLAGS =
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/sreenivas/Desktop/jetpak/Boilerplate2023/libraries/glad/include 
+C_INCLUDES = -I/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glad/include 
 
