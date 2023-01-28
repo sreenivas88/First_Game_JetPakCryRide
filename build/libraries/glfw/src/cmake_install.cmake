@@ -1,4 +1,4 @@
-# Install script for directory: /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src
+# Install script for directory: /home/sreenivas/Desktop/game/First_Game_JetPakCryRide/libraries/glfw/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/src/main.cpp" "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles/app.dir/src/main.cpp.o"
+  "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/src/main.cpp" "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles/app.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -24,8 +24,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
-  "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles/glad.dir/DependInfo.cmake"
+  "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/libraries/glfw/src/CMakeFiles/glfw.dir/DependInfo.cmake"
+  "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles/glad.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

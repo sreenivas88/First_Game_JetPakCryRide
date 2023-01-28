@@ -45,7 +45,7 @@ unset(_expectedTargets)
 add_library(glfw STATIC IMPORTED)
 
 set_target_properties(glfw PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/include"
+  INTERFACE_INCLUDE_DIRECTORIES "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/include"
   INTERFACE_LINK_LIBRARIES "/usr/lib/x86_64-linux-gnu/librt.so;/usr/lib/x86_64-linux-gnu/libm.so;/usr/lib/x86_64-linux-gnu/libX11.so;-lpthread;/usr/lib/x86_64-linux-gnu/libXrandr.so;/usr/lib/x86_64-linux-gnu/libXinerama.so;/usr/lib/x86_64-linux-gnu/libXi.so;/usr/lib/x86_64-linux-gnu/libXxf86vm.so;/usr/lib/x86_64-linux-gnu/libXcursor.so;/usr/lib/x86_64-linux-gnu/libGL.so;dl"
 )
 
@@ -53,7 +53,7 @@ set_target_properties(glfw PROPERTIES
 set_property(TARGET glfw APPEND PROPERTY IMPORTED_CONFIGURATIONS NOCONFIG)
 set_target_properties(glfw PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_NOCONFIG "C"
-  IMPORTED_LOCATION_NOCONFIG "/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src/libglfw3.a"
+  IMPORTED_LOCATION_NOCONFIG "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/libraries/glfw/src/libglfw3.a"
   )
 
 # This file does not depend on other imported targets which have
