@@ -80,10 +80,17 @@ app_EXTERNAL_OBJECTS =
 app: CMakeFiles/app.dir/src/main.cpp.o
 app: CMakeFiles/app.dir/build.make
 app: libraries/glfw/src/libglfw3.a
-app: libglad.a
-app: /usr/lib/x86_64-linux-gnu/libfreetype.so
 app: /usr/lib/x86_64-linux-gnu/librt.so
 app: /usr/lib/x86_64-linux-gnu/libm.so
+app: /usr/lib/x86_64-linux-gnu/libX11.so
+app: /usr/lib/x86_64-linux-gnu/libXrandr.so
+app: /usr/lib/x86_64-linux-gnu/libXinerama.so
+app: /usr/lib/x86_64-linux-gnu/libXi.so
+app: /usr/lib/x86_64-linux-gnu/libXxf86vm.so
+app: /usr/lib/x86_64-linux-gnu/libXcursor.so
+app: /usr/lib/x86_64-linux-gnu/libGL.so
+app: libglad.a
+app: /usr/lib/x86_64-linux-gnu/libfreetype.so
 app: CMakeFiles/app.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable app"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/app.dir/link.txt --verbose=$(VERBOSE)

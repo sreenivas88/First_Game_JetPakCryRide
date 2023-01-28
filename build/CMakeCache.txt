@@ -296,20 +296,63 @@ Fontconfig_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libfontconfig.so
 //Value Computed by CMake
 GLFW_BINARY_DIR:STATIC=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw
 
+//Include internals in documentation
+GLFW_DOCUMENT_INTERNALS:BOOL=OFF
+
+//Dependencies of GLFW
+GLFW_LIBRARIES:STRING=/usr/lib/x86_64-linux-gnu/librt.so;/usr/lib/x86_64-linux-gnu/libm.so;/usr/lib/x86_64-linux-gnu/libX11.so;-lpthread;/usr/lib/x86_64-linux-gnu/libXrandr.so;/usr/lib/x86_64-linux-gnu/libXinerama.so;/usr/lib/x86_64-linux-gnu/libXi.so;/usr/lib/x86_64-linux-gnu/libXxf86vm.so;/usr/lib/x86_64-linux-gnu/libXcursor.so;/usr/lib/x86_64-linux-gnu/libGL.so;dl
+
 //Value Computed by CMake
 GLFW_SOURCE_DIR:STATIC=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw
+
+//Use EGL for context creation
+GLFW_USE_EGL:BOOL=OFF
+
+//Use Mir for context creation (implies EGL as well)
+GLFW_USE_MIR:BOOL=OFF
 
 //Use OSMesa for offscreen context creation
 GLFW_USE_OSMESA:BOOL=OFF
 
-//Use Wayland for window creation
+//Use Wayland for context creation (implies EGL as well)
 GLFW_USE_WAYLAND:BOOL=OFF
 
 //Assume the Vulkan loader is linked with the application
 GLFW_VULKAN_STATIC:BOOL=OFF
 
+//Takes an empty string or 64. Directory where lib will be installed:
+// lib or lib64
+LIB_SUFFIX:STRING=
+
 //Path to a library.
 MATH_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libm.so
+
+//Path to a file.
+OPENGL_EGL_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a file.
+OPENGL_GLX_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a file.
+OPENGL_INCLUDE_DIR:PATH=/usr/include
+
+//Path to a library.
+OPENGL_egl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libEGL.so
+
+//Path to a library.
+OPENGL_gl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGL.so
+
+//Path to a library.
+OPENGL_glu_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLU.so
+
+//Path to a library.
+OPENGL_glx_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLX.so
+
+//Path to a library.
+OPENGL_opengl_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libOpenGL.so
+
+//Path to a file.
+OPENGL_xmesa_INCLUDE_DIR:PATH=OPENGL_xmesa_INCLUDE_DIR-NOTFOUND
 
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
@@ -502,6 +545,9 @@ app_BINARY_DIR:STATIC=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/bu
 
 //Value Computed by CMake
 app_SOURCE_DIR:STATIC=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide
+
+//Dependencies for the target
+glfw_LIB_DEPENDS:STATIC=general;/usr/lib/x86_64-linux-gnu/librt.so;general;/usr/lib/x86_64-linux-gnu/libm.so;general;/usr/lib/x86_64-linux-gnu/libX11.so;general;-lpthread;general;/usr/lib/x86_64-linux-gnu/libXrandr.so;general;/usr/lib/x86_64-linux-gnu/libXinerama.so;general;/usr/lib/x86_64-linux-gnu/libXi.so;general;/usr/lib/x86_64-linux-gnu/libXxf86vm.so;general;/usr/lib/x86_64-linux-gnu/libXcursor.so;general;/usr/lib/x86_64-linux-gnu/libGL.so;general;dl;
 
 //Path to a library.
 pkgcfg_lib_GLEW_GL:FILEPATH=/usr/lib/x86_64-linux-gnu/libGL.so
@@ -721,6 +767,8 @@ CMAKE_UNAME:INTERNAL=/usr/bin/uname
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding Freetype
 FIND_PACKAGE_MESSAGE_DETAILS_Freetype:INTERNAL=[/usr/lib/x86_64-linux-gnu/libfreetype.so][/usr/include/freetype2][v2.10.1()]
+//Details about finding OpenGL
+FIND_PACKAGE_MESSAGE_DETAILS_OpenGL:INTERNAL=[/usr/lib/x86_64-linux-gnu/libOpenGL.so][/usr/lib/x86_64-linux-gnu/libGLX.so][/usr/include][c ][v()]
 //Details about finding PkgConfig
 FIND_PACKAGE_MESSAGE_DETAILS_PkgConfig:INTERNAL=[/usr/bin/pkg-config][v0.29.1()]
 //Details about finding Threads
@@ -819,6 +867,24 @@ GL_gl_PREFIX:INTERNAL=
 GL_gl_VERSION:INTERNAL=
 //ADVANCED property for variable: MATH_LIBRARY
 MATH_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_EGL_INCLUDE_DIR
+OPENGL_EGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_GLX_INCLUDE_DIR
+OPENGL_GLX_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_INCLUDE_DIR
+OPENGL_INCLUDE_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_egl_LIBRARY
+OPENGL_egl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_gl_LIBRARY
+OPENGL_gl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glu_LIBRARY
+OPENGL_glu_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_glx_LIBRARY
+OPENGL_glx_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_opengl_LIBRARY
+OPENGL_opengl_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: OPENGL_xmesa_INCLUDE_DIR
+OPENGL_xmesa_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 PKG_FONTCONFIG_CFLAGS:INTERNAL=-I/usr/include/uuid;-I/usr/include/freetype2;-I/usr/include/libpng16

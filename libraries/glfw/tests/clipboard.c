@@ -1,6 +1,6 @@
 //========================================================================
 // Clipboard test program
-// Copyright (c) Camilla Löwy <elmindreda@glfw.org>
+// Copyright (c) Camilla Berglund <elmindreda@elmindreda.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -27,8 +27,6 @@
 //
 //========================================================================
 
-#include <glad/gl.h>
-#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 #include <stdio.h>
@@ -60,7 +58,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     switch (key)
     {
         case GLFW_KEY_ESCAPE:
-            glfwSetWindowShouldClose(window, GLFW_TRUE);
+            glfwSetWindowShouldClose(window, GL_TRUE);
             break;
 
         case GLFW_KEY_V:
@@ -68,7 +66,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
             {
                 const char* string;
 
-                string = glfwGetClipboardString(NULL);
+                string = glfwGetClipboardString(window);
                 if (string)
                     printf("Clipboard contains \"%s\"\n", string);
                 else
@@ -80,11 +78,16 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
             if (mods == MODIFIER)
             {
                 const char* string = "Hello GLFW World!";
-                glfwSetClipboardString(NULL, string);
+                glfwSetClipboardString(window, string);
                 printf("Setting clipboard to \"%s\"\n", string);
             }
             break;
     }
+}
+
+static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
 }
 
 int main(int argc, char** argv)
@@ -124,16 +127,23 @@ int main(int argc, char** argv)
     }
 
     glfwMakeContextCurrent(window);
-    gladLoadGL(glfwGetProcAddress);
     glfwSwapInterval(1);
 
     glfwSetKeyCallback(window, key_callback);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+    glMatrixMode(GL_PROJECTION);
+    glOrtho(-1.f, 1.f, -1.f, 1.f, -1.f, 1.f);
+    glMatrixMode(GL_MODELVIEW);
 
     glClearColor(0.5f, 0.5f, 0.5f, 0);
 
     while (!glfwWindowShouldClose(window))
     {
         glClear(GL_COLOR_BUFFER_BIT);
+
+        glColor3f(0.8f, 0.2f, 0.4f);
+        glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
 
         glfwSwapBuffers(window);
         glfwWaitEvents();

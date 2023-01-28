@@ -1,1 +1,1 @@
-/usr/bin/c++    -rdynamic CMakeFiles/app.dir/src/main.cpp.o  -o app  libraries/glfw/src/libglfw3.a libglad.a -ldl -lfreetype -lGL -lGLEW -lGLU -lGL -lpthread -lrt -lm -ldl -lGLEW -lGLU 
+/usr/bin/c++    -rdynamic CMakeFiles/app.dir/src/main.cpp.o  -o app  libraries/glfw/src/libglfw3.a -lrt -lm -lX11 -lpthread -lXrandr -lXinerama -lXi -lXxf86vm -lXcursor -lGL -ldl libglad.a -ldl -lfreetype -lGL -lGLEW -lGLU -lGL -lGLEW -lGLU 

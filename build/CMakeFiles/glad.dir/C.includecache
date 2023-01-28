@@ -15,24 +15,8 @@ stdint.h
 -
 
 ../libraries/glad/include/glad/glad.h
-windows.h
--
-stddef.h
--
 KHR/khrplatform.h
--
-inttypes.h
--
-inttypes.h
--
-inttypes.h
--
-stdint.h
--
-stdint.h
--
-inttypes.h
--
+../libraries/glad/include/glad/KHR/khrplatform.h
 
 /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glad/src/glad.c
 stdio.h
@@ -42,9 +26,5 @@ stdlib.h
 string.h
 -
 glad/glad.h
--
-windows.h
--
-dlfcn.h
--
+/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glad/src/glad/glad.h
 

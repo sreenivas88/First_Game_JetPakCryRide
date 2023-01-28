@@ -200,7 +200,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) -f -fpermissive CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/main.cpp.s
+	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target

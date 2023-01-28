@@ -1,6 +1,6 @@
 //========================================================================
 // Context creation and information tool
-// Copyright (c) Camilla Löwy <elmindreda@glfw.org>
+// Copyright (c) Camilla Berglund <elmindreda@elmindreda.org>
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -23,15 +23,17 @@
 //
 //========================================================================
 
-#include <glad/gl.h>
-#include <glad/vulkan.h>
-#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
+
+/* HACK: Explicitly include the glext.h shipping with GLFW, as this program uses
+ *       many modern symbols not provided by the versions in some development
+ *       environments (for example on OS X).
+ */
+#include <GL/glext.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 #include "getopt.h"
 
@@ -42,10 +44,6 @@
 #define API_NAME_OPENGL     "gl"
 #define API_NAME_OPENGL_ES  "es"
 
-#define API_NAME_NATIVE     "native"
-#define API_NAME_EGL        "egl"
-#define API_NAME_OSMESA     "osmesa"
-
 #define PROFILE_NAME_CORE   "core"
 #define PROFILE_NAME_COMPAT "compat"
 
@@ -54,13 +52,6 @@
 
 #define BEHAVIOR_NAME_NONE  "none"
 #define BEHAVIOR_NAME_FLUSH "flush"
-
-#define ANGLE_TYPE_OPENGL   "gl"
-#define ANGLE_TYPE_OPENGLES "es"
-#define ANGLE_TYPE_D3D9     "d3d9"
-#define ANGLE_TYPE_D3D11    "d3d11"
-#define ANGLE_TYPE_VULKAN   "vk"
-#define ANGLE_TYPE_METAL    "mtl"
 
 static void usage(void)
 {
@@ -72,15 +63,10 @@ static void usage(void)
     printf("  -b, --behavior=BEHAVIOR   the release behavior to use ("
                                         BEHAVIOR_NAME_NONE " or "
                                         BEHAVIOR_NAME_FLUSH ")\n");
-    printf("  -c, --context-api=API     the context creation API to use ("
-                                        API_NAME_NATIVE " or "
-                                        API_NAME_EGL " or "
-                                        API_NAME_OSMESA ")\n");
     printf("  -d, --debug               request a debug context\n");
     printf("  -f, --forward             require a forward-compatible context\n");
     printf("  -h, --help                show this help\n");
-    printf("  -l, --list-extensions     list all Vulkan and client API extensions\n");
-    printf("      --list-layers         list all Vulkan layers\n");
+    printf("  -l, --list-extensions     list all client API extensions\n");
     printf("  -m, --major=MAJOR         the major number of the required "
                                         "client API version\n");
     printf("  -n, --minor=MINOR         the minor number of the required "
@@ -107,36 +93,11 @@ static void usage(void)
     printf("      --stereo              request stereo rendering\n");
     printf("      --srgb                request an sRGB capable framebuffer\n");
     printf("      --singlebuffer        request single-buffering\n");
-    printf("      --no-error            request a context that does not emit errors\n");
-    printf("      --angle-type=TYPE     the ANGLE platform type to use ("
-                                        ANGLE_TYPE_OPENGL ", "
-                                        ANGLE_TYPE_OPENGLES ", "
-                                        ANGLE_TYPE_D3D9 ", "
-                                        ANGLE_TYPE_D3D11 ", "
-                                        ANGLE_TYPE_VULKAN " or "
-                                        ANGLE_TYPE_METAL ")\n");
-    printf("      --graphics-switching  request macOS graphics switching\n");
 }
 
 static void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
-}
-
-static const char* get_device_type_name(VkPhysicalDeviceType type)
-{
-    if (type == VK_PHYSICAL_DEVICE_TYPE_OTHER)
-        return "other";
-    else if (type == VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU)
-        return "integrated GPU";
-    else if (type == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
-        return "discrete GPU";
-    else if (type == VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU)
-        return "virtual GPU";
-    else if (type == VK_PHYSICAL_DEVICE_TYPE_CPU)
-        return "CPU";
-
-    return "unknown";
 }
 
 static const char* get_api_name(int api)
@@ -189,110 +150,47 @@ static const char* get_strategy_name_glfw(int strategy)
     return "unknown";
 }
 
-static void list_context_extensions(int client, int major, int minor)
+static void list_extensions(int api, int major, int minor)
 {
-    printf("%s context extensions:\n", get_api_name(client));
+    int i;
+    GLint count;
+    const GLubyte* extensions;
 
-    if (client == GLFW_OPENGL_API && major > 2)
+    printf("%s context supported extensions:\n", get_api_name(api));
+
+    if (api == GLFW_OPENGL_API && major > 2)
     {
-        GLint count;
+        PFNGLGETSTRINGIPROC glGetStringi =
+            (PFNGLGETSTRINGIPROC) glfwGetProcAddress("glGetStringi");
+        if (!glGetStringi)
+        {
+            glfwTerminate();
+            exit(EXIT_FAILURE);
+        }
+
         glGetIntegerv(GL_NUM_EXTENSIONS, &count);
 
-        for (int i = 0;  i < count;  i++)
-            printf(" %s\n", (const char*) glGetStringi(GL_EXTENSIONS, i));
+        for (i = 0;  i < count;  i++)
+            puts((const char*) glGetStringi(GL_EXTENSIONS, i));
     }
     else
     {
-        const GLubyte* extensions = glGetString(GL_EXTENSIONS);
+        extensions = glGetString(GL_EXTENSIONS);
         while (*extensions != '\0')
         {
-            putchar(' ');
-
-            while (*extensions != '\0' && *extensions != ' ')
-            {
+            if (*extensions == ' ')
+                putchar('\n');
+            else
                 putchar(*extensions);
-                extensions++;
-            }
 
-            while (*extensions == ' ')
-                extensions++;
-
-            putchar('\n');
+            extensions++;
         }
     }
+
+    putchar('\n');
 }
 
-static void list_vulkan_instance_extensions(void)
-{
-    printf("Vulkan instance extensions:\n");
-
-    uint32_t ep_count;
-    vkEnumerateInstanceExtensionProperties(NULL, &ep_count, NULL);
-    VkExtensionProperties* ep = calloc(ep_count, sizeof(VkExtensionProperties));
-    vkEnumerateInstanceExtensionProperties(NULL, &ep_count, ep);
-
-    for (uint32_t i = 0;  i < ep_count;  i++)
-        printf(" %s (spec version %u)\n", ep[i].extensionName, ep[i].specVersion);
-
-    free(ep);
-}
-
-static void list_vulkan_instance_layers(void)
-{
-    printf("Vulkan instance layers:\n");
-
-    uint32_t lp_count;
-    vkEnumerateInstanceLayerProperties(&lp_count, NULL);
-    VkLayerProperties* lp = calloc(lp_count, sizeof(VkLayerProperties));
-    vkEnumerateInstanceLayerProperties(&lp_count, lp);
-
-    for (uint32_t i = 0;  i < lp_count;  i++)
-    {
-        printf(" %s (spec version %u) \"%s\"\n",
-               lp[i].layerName,
-               lp[i].specVersion >> 22,
-               lp[i].description);
-    }
-
-    free(lp);
-}
-
-static void list_vulkan_device_extensions(VkInstance instance, VkPhysicalDevice device)
-{
-    printf("Vulkan device extensions:\n");
-
-    uint32_t ep_count;
-    vkEnumerateDeviceExtensionProperties(device, NULL, &ep_count, NULL);
-    VkExtensionProperties* ep = calloc(ep_count, sizeof(VkExtensionProperties));
-    vkEnumerateDeviceExtensionProperties(device, NULL, &ep_count, ep);
-
-    for (uint32_t i = 0;  i < ep_count;  i++)
-        printf(" %s (spec version %u)\n", ep[i].extensionName, ep[i].specVersion);
-
-    free(ep);
-}
-
-static void list_vulkan_device_layers(VkInstance instance, VkPhysicalDevice device)
-{
-    printf("Vulkan device layers:\n");
-
-    uint32_t lp_count;
-    vkEnumerateDeviceLayerProperties(device, &lp_count, NULL);
-    VkLayerProperties* lp = calloc(lp_count, sizeof(VkLayerProperties));
-    vkEnumerateDeviceLayerProperties(device, &lp_count, lp);
-
-    for (uint32_t i = 0;  i < lp_count;  i++)
-    {
-        printf(" %s (spec version %u) \"%s\"\n",
-               lp[i].layerName,
-               lp[i].specVersion >> 22,
-               lp[i].description);
-    }
-
-    free(lp);
-}
-
-static bool valid_version(void)
+static GLboolean valid_version(void)
 {
     int major, minor, revision;
     glfwGetVersion(&major, &minor, &revision);
@@ -300,13 +198,13 @@ static bool valid_version(void)
     if (major != GLFW_VERSION_MAJOR)
     {
         printf("*** ERROR: GLFW major version mismatch! ***\n");
-        return false;
+        return GL_FALSE;
     }
 
     if (minor != GLFW_VERSION_MINOR || revision != GLFW_VERSION_REVISION)
         printf("*** WARNING: GLFW version mismatch! ***\n");
 
-    return true;
+    return GL_TRUE;
 }
 
 static void print_version(void)
@@ -322,98 +220,69 @@ static void print_version(void)
     printf("GLFW library version string: \"%s\"\n", glfwGetVersionString());
 }
 
-static GLADapiproc glad_vulkan_callback(const char* name, void* user)
-{
-    return glfwGetInstanceProcAddress((VkInstance) user, name);
-}
-
 int main(int argc, char** argv)
 {
-    int ch;
-    bool list_extensions = false, list_layers = false;
+    int ch, api, major, minor, revision, profile;
+    GLint redbits, greenbits, bluebits, alphabits, depthbits, stencilbits;
+    GLboolean list = GL_FALSE;
+    GLFWwindow* window;
 
-    // These duplicate the defaults for each hint
-    int client_api = GLFW_OPENGL_API;
-    int context_major = 1;
-    int context_minor = 0;
-    int context_release = GLFW_ANY_RELEASE_BEHAVIOR;
-    int context_creation_api = GLFW_NATIVE_CONTEXT_API;
-    int context_robustness = GLFW_NO_ROBUSTNESS;
-    bool context_debug = false;
-    bool context_no_error = false;
-    bool opengl_forward = false;
-    int opengl_profile = GLFW_OPENGL_ANY_PROFILE;
-    int fb_red_bits = 8;
-    int fb_green_bits = 8;
-    int fb_blue_bits = 8;
-    int fb_alpha_bits = 8;
-    int fb_depth_bits = 24;
-    int fb_stencil_bits = 8;
-    int fb_accum_red_bits = 0;
-    int fb_accum_green_bits = 0;
-    int fb_accum_blue_bits = 0;
-    int fb_accum_alpha_bits = 0;
-    int fb_aux_buffers = 0;
-    int fb_samples = 0;
-    bool fb_stereo = false;
-    bool fb_srgb = false;
-    bool fb_doublebuffer = true;
-    int angle_type = GLFW_ANGLE_PLATFORM_TYPE_NONE;
-    bool cocoa_graphics_switching = false;
-
-    enum { CLIENT, CONTEXT, BEHAVIOR, DEBUG_CONTEXT, FORWARD, HELP,
-           EXTENSIONS, LAYERS,
+    enum { API, BEHAVIOR, DEBUG, FORWARD, HELP, EXTENSIONS,
            MAJOR, MINOR, PROFILE, ROBUSTNESS, VERSION,
            REDBITS, GREENBITS, BLUEBITS, ALPHABITS, DEPTHBITS, STENCILBITS,
            ACCUMREDBITS, ACCUMGREENBITS, ACCUMBLUEBITS, ACCUMALPHABITS,
-           AUXBUFFERS, SAMPLES, STEREO, SRGB, SINGLEBUFFER, NOERROR_SRSLY,
-           ANGLE_TYPE, GRAPHICS_SWITCHING };
+           AUXBUFFERS, SAMPLES, STEREO, SRGB, SINGLEBUFFER };
     const struct option options[] =
     {
-        { "behavior",           1, NULL, BEHAVIOR },
-        { "client-api",         1, NULL, CLIENT },
-        { "context-api",        1, NULL, CONTEXT },
-        { "debug",              0, NULL, DEBUG_CONTEXT },
-        { "forward",            0, NULL, FORWARD },
-        { "help",               0, NULL, HELP },
-        { "list-extensions",    0, NULL, EXTENSIONS },
-        { "list-layers",        0, NULL, LAYERS },
-        { "major",              1, NULL, MAJOR },
-        { "minor",              1, NULL, MINOR },
-        { "profile",            1, NULL, PROFILE },
-        { "robustness",         1, NULL, ROBUSTNESS },
-        { "version",            0, NULL, VERSION },
-        { "red-bits",           1, NULL, REDBITS },
-        { "green-bits",         1, NULL, GREENBITS },
-        { "blue-bits",          1, NULL, BLUEBITS },
-        { "alpha-bits",         1, NULL, ALPHABITS },
-        { "depth-bits",         1, NULL, DEPTHBITS },
-        { "stencil-bits",       1, NULL, STENCILBITS },
-        { "accum-red-bits",     1, NULL, ACCUMREDBITS },
-        { "accum-green-bits",   1, NULL, ACCUMGREENBITS },
-        { "accum-blue-bits",    1, NULL, ACCUMBLUEBITS },
-        { "accum-alpha-bits",   1, NULL, ACCUMALPHABITS },
-        { "aux-buffers",        1, NULL, AUXBUFFERS },
-        { "samples",            1, NULL, SAMPLES },
-        { "stereo",             0, NULL, STEREO },
-        { "srgb",               0, NULL, SRGB },
-        { "singlebuffer",       0, NULL, SINGLEBUFFER },
-        { "no-error",           0, NULL, NOERROR_SRSLY },
-        { "angle-type",         1, NULL, ANGLE_TYPE },
-        { "graphics-switching", 0, NULL, GRAPHICS_SWITCHING },
+        { "behavior",         1, NULL, BEHAVIOR },
+        { "client-api",       1, NULL, API },
+        { "debug",            0, NULL, DEBUG },
+        { "forward",          0, NULL, FORWARD },
+        { "help",             0, NULL, HELP },
+        { "list-extensions",  0, NULL, EXTENSIONS },
+        { "major",            1, NULL, MAJOR },
+        { "minor",            1, NULL, MINOR },
+        { "profile",          1, NULL, PROFILE },
+        { "robustness",       1, NULL, ROBUSTNESS },
+        { "version",          0, NULL, VERSION },
+        { "red-bits",         1, NULL, REDBITS },
+        { "green-bits",       1, NULL, GREENBITS },
+        { "blue-bits",        1, NULL, BLUEBITS },
+        { "alpha-bits",       1, NULL, ALPHABITS },
+        { "depth-bits",       1, NULL, DEPTHBITS },
+        { "stencil-bits",     1, NULL, STENCILBITS },
+        { "accum-red-bits",   1, NULL, ACCUMREDBITS },
+        { "accum-green-bits", 1, NULL, ACCUMGREENBITS },
+        { "accum-blue-bits",  1, NULL, ACCUMBLUEBITS },
+        { "accum-alpha-bits", 1, NULL, ACCUMALPHABITS },
+        { "aux-buffers",      1, NULL, AUXBUFFERS },
+        { "samples",          1, NULL, SAMPLES },
+        { "stereo",           0, NULL, STEREO },
+        { "srgb",             0, NULL, SRGB },
+        { "singlebuffer",     0, NULL, SINGLEBUFFER },
         { NULL, 0, NULL, 0 }
     };
 
-    while ((ch = getopt_long(argc, argv, "a:b:c:dfhlm:n:p:s:v", options, NULL)) != -1)
+    // Initialize GLFW and create window
+
+    if (!valid_version())
+        exit(EXIT_FAILURE);
+
+    glfwSetErrorCallback(error_callback);
+
+    if (!glfwInit())
+        exit(EXIT_FAILURE);
+
+    while ((ch = getopt_long(argc, argv, "a:b:dfhlm:n:p:s:v", options, NULL)) != -1)
     {
         switch (ch)
         {
             case 'a':
-            case CLIENT:
+            case API:
                 if (strcasecmp(optarg, API_NAME_OPENGL) == 0)
-                    client_api = GLFW_OPENGL_API;
+                    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
                 else if (strcasecmp(optarg, API_NAME_OPENGL_ES) == 0)
-                    client_api = GLFW_OPENGL_ES_API;
+                    glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
                 else
                 {
                     usage();
@@ -423,23 +292,15 @@ int main(int argc, char** argv)
             case 'b':
             case BEHAVIOR:
                 if (strcasecmp(optarg, BEHAVIOR_NAME_NONE) == 0)
-                    context_release = GLFW_RELEASE_BEHAVIOR_NONE;
-                else if (strcasecmp(optarg, BEHAVIOR_NAME_FLUSH) == 0)
-                    context_release = GLFW_RELEASE_BEHAVIOR_FLUSH;
-                else
                 {
-                    usage();
-                    exit(EXIT_FAILURE);
+                    glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR,
+                                   GLFW_RELEASE_BEHAVIOR_NONE);
                 }
-                break;
-            case 'c':
-            case CONTEXT:
-                if (strcasecmp(optarg, API_NAME_NATIVE) == 0)
-                    context_creation_api = GLFW_NATIVE_CONTEXT_API;
-                else if (strcasecmp(optarg, API_NAME_EGL) == 0)
-                    context_creation_api = GLFW_EGL_CONTEXT_API;
-                else if (strcasecmp(optarg, API_NAME_OSMESA) == 0)
-                    context_creation_api = GLFW_OSMESA_CONTEXT_API;
+                else if (strcasecmp(optarg, BEHAVIOR_NAME_FLUSH) == 0)
+                {
+                    glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR,
+                                   GLFW_RELEASE_BEHAVIOR_FLUSH);
+                }
                 else
                 {
                     usage();
@@ -447,12 +308,12 @@ int main(int argc, char** argv)
                 }
                 break;
             case 'd':
-            case DEBUG_CONTEXT:
-                context_debug = true;
+            case DEBUG:
+                glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
                 break;
             case 'f':
             case FORWARD:
-                opengl_forward = true;
+                glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
                 break;
             case 'h':
             case HELP:
@@ -460,25 +321,28 @@ int main(int argc, char** argv)
                 exit(EXIT_SUCCESS);
             case 'l':
             case EXTENSIONS:
-                list_extensions = true;
-                break;
-            case LAYERS:
-                list_layers = true;
+                list = GL_TRUE;
                 break;
             case 'm':
             case MAJOR:
-                context_major = atoi(optarg);
+                glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, atoi(optarg));
                 break;
             case 'n':
             case MINOR:
-                context_minor = atoi(optarg);
+                glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, atoi(optarg));
                 break;
             case 'p':
             case PROFILE:
                 if (strcasecmp(optarg, PROFILE_NAME_CORE) == 0)
-                    opengl_profile = GLFW_OPENGL_CORE_PROFILE;
+                {
+                    glfwWindowHint(GLFW_OPENGL_PROFILE,
+                                   GLFW_OPENGL_CORE_PROFILE);
+                }
                 else if (strcasecmp(optarg, PROFILE_NAME_COMPAT) == 0)
-                    opengl_profile = GLFW_OPENGL_COMPAT_PROFILE;
+                {
+                    glfwWindowHint(GLFW_OPENGL_PROFILE,
+                                   GLFW_OPENGL_COMPAT_PROFILE);
+                }
                 else
                 {
                     usage();
@@ -488,9 +352,15 @@ int main(int argc, char** argv)
             case 's':
             case ROBUSTNESS:
                 if (strcasecmp(optarg, STRATEGY_NAME_NONE) == 0)
-                    context_robustness = GLFW_NO_RESET_NOTIFICATION;
+                {
+                    glfwWindowHint(GLFW_CONTEXT_ROBUSTNESS,
+                                   GLFW_NO_RESET_NOTIFICATION);
+                }
                 else if (strcasecmp(optarg, STRATEGY_NAME_LOSE) == 0)
-                    context_robustness = GLFW_LOSE_CONTEXT_ON_RESET;
+                {
+                    glfwWindowHint(GLFW_CONTEXT_ROBUSTNESS,
+                                   GLFW_LOSE_CONTEXT_ON_RESET);
+                }
                 else
                 {
                     usage();
@@ -503,109 +373,84 @@ int main(int argc, char** argv)
                 exit(EXIT_SUCCESS);
             case REDBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_red_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_RED_BITS, GLFW_DONT_CARE);
                 else
-                    fb_red_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_RED_BITS, atoi(optarg));
                 break;
             case GREENBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_green_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_GREEN_BITS, GLFW_DONT_CARE);
                 else
-                    fb_green_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_GREEN_BITS, atoi(optarg));
                 break;
             case BLUEBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_blue_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_BLUE_BITS, GLFW_DONT_CARE);
                 else
-                    fb_blue_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_BLUE_BITS, atoi(optarg));
                 break;
             case ALPHABITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_alpha_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_ALPHA_BITS, GLFW_DONT_CARE);
                 else
-                    fb_alpha_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_ALPHA_BITS, atoi(optarg));
                 break;
             case DEPTHBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_depth_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_DEPTH_BITS, GLFW_DONT_CARE);
                 else
-                    fb_depth_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_DEPTH_BITS, atoi(optarg));
                 break;
             case STENCILBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_stencil_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_STENCIL_BITS, GLFW_DONT_CARE);
                 else
-                    fb_stencil_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_STENCIL_BITS, atoi(optarg));
                 break;
             case ACCUMREDBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_accum_red_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_ACCUM_RED_BITS, GLFW_DONT_CARE);
                 else
-                    fb_accum_red_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_ACCUM_RED_BITS, atoi(optarg));
                 break;
             case ACCUMGREENBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_accum_green_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_ACCUM_GREEN_BITS, GLFW_DONT_CARE);
                 else
-                    fb_accum_green_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_ACCUM_GREEN_BITS, atoi(optarg));
                 break;
             case ACCUMBLUEBITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_accum_blue_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_ACCUM_BLUE_BITS, GLFW_DONT_CARE);
                 else
-                    fb_accum_blue_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_ACCUM_BLUE_BITS, atoi(optarg));
                 break;
             case ACCUMALPHABITS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_accum_alpha_bits = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_ACCUM_ALPHA_BITS, GLFW_DONT_CARE);
                 else
-                    fb_accum_alpha_bits = atoi(optarg);
+                    glfwWindowHint(GLFW_ACCUM_ALPHA_BITS, atoi(optarg));
                 break;
             case AUXBUFFERS:
                 if (strcmp(optarg, "-") == 0)
-                    fb_aux_buffers = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_AUX_BUFFERS, GLFW_DONT_CARE);
                 else
-                    fb_aux_buffers = atoi(optarg);
+                    glfwWindowHint(GLFW_AUX_BUFFERS, atoi(optarg));
                 break;
             case SAMPLES:
                 if (strcmp(optarg, "-") == 0)
-                    fb_samples = GLFW_DONT_CARE;
+                    glfwWindowHint(GLFW_SAMPLES, GLFW_DONT_CARE);
                 else
-                    fb_samples = atoi(optarg);
+                    glfwWindowHint(GLFW_SAMPLES, atoi(optarg));
                 break;
             case STEREO:
-                fb_stereo = true;
+                glfwWindowHint(GLFW_STEREO, GL_TRUE);
                 break;
             case SRGB:
-                fb_srgb = true;
+                glfwWindowHint(GLFW_SRGB_CAPABLE, GL_TRUE);
                 break;
             case SINGLEBUFFER:
-                fb_doublebuffer = false;
-                break;
-            case NOERROR_SRSLY:
-                context_no_error = true;
-                break;
-            case ANGLE_TYPE:
-                if (strcmp(optarg, ANGLE_TYPE_OPENGL) == 0)
-                    angle_type = GLFW_ANGLE_PLATFORM_TYPE_OPENGL;
-                else if (strcmp(optarg, ANGLE_TYPE_OPENGLES) == 0)
-                    angle_type = GLFW_ANGLE_PLATFORM_TYPE_OPENGLES;
-                else if (strcmp(optarg, ANGLE_TYPE_D3D9) == 0)
-                    angle_type = GLFW_ANGLE_PLATFORM_TYPE_D3D9;
-                else if (strcmp(optarg, ANGLE_TYPE_D3D11) == 0)
-                    angle_type = GLFW_ANGLE_PLATFORM_TYPE_D3D11;
-                else if (strcmp(optarg, ANGLE_TYPE_VULKAN) == 0)
-                    angle_type = GLFW_ANGLE_PLATFORM_TYPE_VULKAN;
-                else if (strcmp(optarg, ANGLE_TYPE_METAL) == 0)
-                    angle_type = GLFW_ANGLE_PLATFORM_TYPE_METAL;
-                else
-                {
-                    usage();
-                    exit(EXIT_FAILURE);
-                }
-                break;
-            case GRAPHICS_SWITCHING:
-                cocoa_graphics_switching = true;
+                glfwWindowHint(GLFW_DOUBLEBUFFER, GL_FALSE);
                 break;
             default:
                 usage();
@@ -613,54 +458,11 @@ int main(int argc, char** argv)
         }
     }
 
-    // Initialize GLFW and create window
-
-    if (!valid_version())
-        exit(EXIT_FAILURE);
-
-    glfwSetErrorCallback(error_callback);
-
-    glfwInitHint(GLFW_COCOA_MENUBAR, false);
-
-    glfwInitHint(GLFW_ANGLE_PLATFORM_TYPE, angle_type);
-
-    if (!glfwInit())
-        exit(EXIT_FAILURE);
-
     print_version();
 
-    glfwWindowHint(GLFW_VISIBLE, false);
+    glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 
-    glfwWindowHint(GLFW_CLIENT_API, client_api);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, context_major);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, context_minor);
-    glfwWindowHint(GLFW_CONTEXT_RELEASE_BEHAVIOR, context_release);
-    glfwWindowHint(GLFW_CONTEXT_CREATION_API, context_creation_api);
-    glfwWindowHint(GLFW_CONTEXT_ROBUSTNESS, context_robustness);
-    glfwWindowHint(GLFW_CONTEXT_DEBUG, context_debug);
-    glfwWindowHint(GLFW_CONTEXT_NO_ERROR, context_no_error);
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, opengl_forward);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, opengl_profile);
-
-    glfwWindowHint(GLFW_RED_BITS, fb_red_bits);
-    glfwWindowHint(GLFW_BLUE_BITS, fb_blue_bits);
-    glfwWindowHint(GLFW_GREEN_BITS, fb_green_bits);
-    glfwWindowHint(GLFW_ALPHA_BITS, fb_alpha_bits);
-    glfwWindowHint(GLFW_DEPTH_BITS, fb_depth_bits);
-    glfwWindowHint(GLFW_STENCIL_BITS, fb_stencil_bits);
-    glfwWindowHint(GLFW_ACCUM_RED_BITS, fb_accum_red_bits);
-    glfwWindowHint(GLFW_ACCUM_GREEN_BITS, fb_accum_green_bits);
-    glfwWindowHint(GLFW_ACCUM_BLUE_BITS, fb_accum_blue_bits);
-    glfwWindowHint(GLFW_ACCUM_ALPHA_BITS, fb_accum_alpha_bits);
-    glfwWindowHint(GLFW_AUX_BUFFERS, fb_aux_buffers);
-    glfwWindowHint(GLFW_SAMPLES, fb_samples);
-    glfwWindowHint(GLFW_STEREO, fb_stereo);
-    glfwWindowHint(GLFW_SRGB_CAPABLE, fb_srgb);
-    glfwWindowHint(GLFW_DOUBLEBUFFER, fb_doublebuffer);
-
-    glfwWindowHint(GLFW_COCOA_GRAPHICS_SWITCHING, cocoa_graphics_switching);
-
-    GLFWwindow* window = glfwCreateWindow(200, 200, "Version", NULL, NULL);
+    window = glfwCreateWindow(200, 200, "Version", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -668,59 +470,50 @@ int main(int argc, char** argv)
     }
 
     glfwMakeContextCurrent(window);
-    gladLoadGL(glfwGetProcAddress);
-
-    const GLenum error = glGetError();
-    if (error != GL_NO_ERROR)
-        printf("*** OpenGL error after make current: 0x%08x ***\n", error);
 
     // Report client API version
 
-    const int client = glfwGetWindowAttrib(window, GLFW_CLIENT_API);
-    const int major = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MAJOR);
-    const int minor = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MINOR);
-    const int revision = glfwGetWindowAttrib(window, GLFW_CONTEXT_REVISION);
-    const int profile = glfwGetWindowAttrib(window, GLFW_OPENGL_PROFILE);
+    api = glfwGetWindowAttrib(window, GLFW_CLIENT_API);
+    major = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MAJOR);
+    minor = glfwGetWindowAttrib(window, GLFW_CONTEXT_VERSION_MINOR);
+    revision = glfwGetWindowAttrib(window, GLFW_CONTEXT_REVISION);
+    profile = glfwGetWindowAttrib(window, GLFW_OPENGL_PROFILE);
 
     printf("%s context version string: \"%s\"\n",
-           get_api_name(client),
+           get_api_name(api),
            glGetString(GL_VERSION));
 
     printf("%s context version parsed by GLFW: %u.%u.%u\n",
-           get_api_name(client),
+           get_api_name(api),
            major, minor, revision);
 
     // Report client API context properties
 
-    if (client == GLFW_OPENGL_API)
+    if (api == GLFW_OPENGL_API)
     {
         if (major >= 3)
         {
             GLint flags;
 
             glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
-            printf("%s context flags (0x%08x):", get_api_name(client), flags);
+            printf("%s context flags (0x%08x):", get_api_name(api), flags);
 
             if (flags & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT)
                 printf(" forward-compatible");
-            if (flags & 2/*GL_CONTEXT_FLAG_DEBUG_BIT*/)
+            if (flags & GL_CONTEXT_FLAG_DEBUG_BIT)
                 printf(" debug");
             if (flags & GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB)
                 printf(" robustness");
-            if (flags & 8/*GL_CONTEXT_FLAG_NO_ERROR_BIT_KHR*/)
-                printf(" no-error");
             putchar('\n');
 
-            printf("%s context flags parsed by GLFW:", get_api_name(client));
+            printf("%s context flags parsed by GLFW:", get_api_name(api));
 
             if (glfwGetWindowAttrib(window, GLFW_OPENGL_FORWARD_COMPAT))
                 printf(" forward-compatible");
-            if (glfwGetWindowAttrib(window, GLFW_CONTEXT_DEBUG))
+            if (glfwGetWindowAttrib(window, GLFW_OPENGL_DEBUG_CONTEXT))
                 printf(" debug");
             if (glfwGetWindowAttrib(window, GLFW_CONTEXT_ROBUSTNESS) == GLFW_LOSE_CONTEXT_ON_RESET)
                 printf(" robustness");
-            if (glfwGetWindowAttrib(window, GLFW_CONTEXT_NO_ERROR))
-                printf(" no-error");
             putchar('\n');
         }
 
@@ -730,52 +523,60 @@ int main(int argc, char** argv)
             glGetIntegerv(GL_CONTEXT_PROFILE_MASK, &mask);
 
             printf("%s profile mask (0x%08x): %s\n",
-                   get_api_name(client),
+                   get_api_name(api),
                    mask,
                    get_profile_name_gl(mask));
 
             printf("%s profile mask parsed by GLFW: %s\n",
-                   get_api_name(client),
+                   get_api_name(api),
                    get_profile_name_glfw(profile));
         }
 
-        if (GLAD_GL_ARB_robustness)
+        if (glfwExtensionSupported("GL_ARB_robustness"))
         {
             const int robustness = glfwGetWindowAttrib(window, GLFW_CONTEXT_ROBUSTNESS);
             GLint strategy;
             glGetIntegerv(GL_RESET_NOTIFICATION_STRATEGY_ARB, &strategy);
 
             printf("%s robustness strategy (0x%08x): %s\n",
-                   get_api_name(client),
+                   get_api_name(api),
                    strategy,
                    get_strategy_name_gl(strategy));
 
             printf("%s robustness strategy parsed by GLFW: %s\n",
-                   get_api_name(client),
+                   get_api_name(api),
                    get_strategy_name_glfw(robustness));
         }
     }
 
     printf("%s context renderer string: \"%s\"\n",
-           get_api_name(client),
+           get_api_name(api),
            glGetString(GL_RENDERER));
     printf("%s context vendor string: \"%s\"\n",
-           get_api_name(client),
+           get_api_name(api),
            glGetString(GL_VENDOR));
 
     if (major >= 2)
     {
         printf("%s context shading language version: \"%s\"\n",
-               get_api_name(client),
+               get_api_name(api),
                glGetString(GL_SHADING_LANGUAGE_VERSION));
     }
 
-    printf("%s framebuffer:\n", get_api_name(client));
+    printf("Framebuffer:\n");
 
-    GLint redbits, greenbits, bluebits, alphabits, depthbits, stencilbits;
-
-    if (client == GLFW_OPENGL_API && profile == GLFW_OPENGL_CORE_PROFILE)
+    if (api == GLFW_OPENGL_API && profile == GLFW_OPENGL_CORE_PROFILE)
     {
+        PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC
+            glGetFramebufferAttachmentParameteriv =
+            (PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC)
+            glfwGetProcAddress("glGetFramebufferAttachmentParameteriv");
+        if (!glGetFramebufferAttachmentParameteriv)
+        {
+            glfwTerminate();
+            exit(EXIT_FAILURE);
+        }
+
         glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER,
                                               GL_BACK_LEFT,
                                               GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE,
@@ -814,8 +615,8 @@ int main(int argc, char** argv)
     printf(" red: %u green: %u blue: %u alpha: %u depth: %u stencil: %u\n",
            redbits, greenbits, bluebits, alphabits, depthbits, stencilbits);
 
-    if (client == GLFW_OPENGL_ES_API ||
-        GLAD_GL_ARB_multisample ||
+    if (api == GLFW_OPENGL_ES_API ||
+        glfwExtensionSupported("GL_ARB_multisample") ||
         major > 1 || minor >= 3)
     {
         GLint samples, samplebuffers;
@@ -825,7 +626,7 @@ int main(int argc, char** argv)
         printf(" samples: %u sample buffers: %u\n", samples, samplebuffers);
     }
 
-    if (client == GLFW_OPENGL_API && profile != GLFW_OPENGL_CORE_PROFILE)
+    if (api == GLFW_OPENGL_API && profile != GLFW_OPENGL_CORE_PROFILE)
     {
         GLint accumredbits, accumgreenbits, accumbluebits, accumalphabits;
         GLint auxbuffers;
@@ -840,101 +641,9 @@ int main(int argc, char** argv)
                accumredbits, accumgreenbits, accumbluebits, accumalphabits, auxbuffers);
     }
 
-    if (list_extensions)
-        list_context_extensions(client, major, minor);
-
-    printf("Vulkan loader: %s\n",
-           glfwVulkanSupported() ? "available" : "missing");
-
-    if (glfwVulkanSupported())
-    {
-        gladLoadVulkanUserPtr(NULL, glad_vulkan_callback, NULL);
-
-        uint32_t loader_version = VK_API_VERSION_1_0;
-
-        if (vkEnumerateInstanceVersion)
-        {
-            uint32_t version;
-            if (vkEnumerateInstanceVersion(&version) == VK_SUCCESS)
-                loader_version = version;
-        }
-
-        printf("Vulkan loader API version: %i.%i\n",
-               VK_VERSION_MAJOR(loader_version),
-               VK_VERSION_MINOR(loader_version));
-
-        uint32_t re_count;
-        const char** re = glfwGetRequiredInstanceExtensions(&re_count);
-
-        printf("Vulkan required instance extensions:");
-        if (re)
-        {
-            for (uint32_t i = 0;  i < re_count;  i++)
-                printf(" %s", re[i]);
-            putchar('\n');
-        }
-        else
-            printf(" missing\n");
-
-        if (list_extensions)
-            list_vulkan_instance_extensions();
-
-        if (list_layers)
-            list_vulkan_instance_layers();
-
-        VkApplicationInfo ai = { VK_STRUCTURE_TYPE_APPLICATION_INFO };
-        ai.pApplicationName = "glfwinfo";
-        ai.applicationVersion = VK_MAKE_VERSION(GLFW_VERSION_MAJOR,
-                                                GLFW_VERSION_MINOR,
-                                                GLFW_VERSION_REVISION);
-
-        if (loader_version >= VK_API_VERSION_1_1)
-            ai.apiVersion = VK_API_VERSION_1_1;
-        else
-            ai.apiVersion = VK_API_VERSION_1_0;
-
-        VkInstanceCreateInfo ici = { VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO };
-        ici.pApplicationInfo = &ai;
-        ici.enabledExtensionCount = re_count;
-        ici.ppEnabledExtensionNames = re;
-
-        VkInstance instance = VK_NULL_HANDLE;
-
-        if (vkCreateInstance(&ici, NULL, &instance) != VK_SUCCESS)
-        {
-            glfwTerminate();
-            exit(EXIT_FAILURE);
-        }
-
-        gladLoadVulkanUserPtr(NULL, glad_vulkan_callback, instance);
-
-        uint32_t pd_count;
-        vkEnumeratePhysicalDevices(instance, &pd_count, NULL);
-        VkPhysicalDevice* pd = calloc(pd_count, sizeof(VkPhysicalDevice));
-        vkEnumeratePhysicalDevices(instance, &pd_count, pd);
-
-        for (uint32_t i = 0;  i < pd_count;  i++)
-        {
-            VkPhysicalDeviceProperties pdp;
-
-            vkGetPhysicalDeviceProperties(pd[i], &pdp);
-
-            printf("Vulkan %s device: \"%s\" (API version %i.%i)\n",
-                   get_device_type_name(pdp.deviceType),
-                   pdp.deviceName,
-                   VK_VERSION_MAJOR(pdp.apiVersion),
-                   VK_VERSION_MINOR(pdp.apiVersion));
-
-            if (list_extensions)
-                list_vulkan_device_extensions(instance, pd[i]);
-
-            if (list_layers)
-                list_vulkan_device_layers(instance, pd[i]);
-        }
-
-        free(pd);
-        vkDestroyInstance(instance, NULL);
-    }
+    // Report client API extensions
+    if (list)
+        list_extensions(api, major, minor);
 
     glfwTerminate();
     exit(EXIT_SUCCESS);

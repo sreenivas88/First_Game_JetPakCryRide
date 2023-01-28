@@ -60,84 +60,71 @@ include libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/context.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/context.c.o: ../libraries/glfw/src/context.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/context.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/context.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/context.c
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/context.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/context.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/context.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/context.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/context.c > CMakeFiles/glfw.dir/context.c.i
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/context.c > CMakeFiles/glfw.dir/context.c.i
 
 libraries/glfw/src/CMakeFiles/glfw.dir/context.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/context.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/context.c -o CMakeFiles/glfw.dir/context.c.s
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/context.c -o CMakeFiles/glfw.dir/context.c.s
 
 libraries/glfw/src/CMakeFiles/glfw.dir/init.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/init.c.o: ../libraries/glfw/src/init.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/init.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/init.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/init.c
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/init.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/init.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/init.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/init.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/init.c > CMakeFiles/glfw.dir/init.c.i
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/init.c > CMakeFiles/glfw.dir/init.c.i
 
 libraries/glfw/src/CMakeFiles/glfw.dir/init.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/init.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/init.c -o CMakeFiles/glfw.dir/init.c.s
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/init.c -o CMakeFiles/glfw.dir/init.c.s
 
 libraries/glfw/src/CMakeFiles/glfw.dir/input.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/input.c.o: ../libraries/glfw/src/input.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/input.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/input.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/input.c
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/input.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/input.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/input.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/input.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/input.c > CMakeFiles/glfw.dir/input.c.i
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/input.c > CMakeFiles/glfw.dir/input.c.i
 
 libraries/glfw/src/CMakeFiles/glfw.dir/input.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/input.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/input.c -o CMakeFiles/glfw.dir/input.c.s
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/input.c -o CMakeFiles/glfw.dir/input.c.s
 
 libraries/glfw/src/CMakeFiles/glfw.dir/monitor.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/monitor.c.o: ../libraries/glfw/src/monitor.c
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/monitor.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/monitor.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/monitor.c
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/monitor.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/monitor.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/monitor.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/monitor.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/monitor.c > CMakeFiles/glfw.dir/monitor.c.i
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/monitor.c > CMakeFiles/glfw.dir/monitor.c.i
 
 libraries/glfw/src/CMakeFiles/glfw.dir/monitor.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/monitor.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/monitor.c -o CMakeFiles/glfw.dir/monitor.c.s
-
-libraries/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
-libraries/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o: ../libraries/glfw/src/vulkan.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/vulkan.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/vulkan.c
-
-libraries/glfw/src/CMakeFiles/glfw.dir/vulkan.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/vulkan.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/vulkan.c > CMakeFiles/glfw.dir/vulkan.c.i
-
-libraries/glfw/src/CMakeFiles/glfw.dir/vulkan.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/vulkan.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/vulkan.c -o CMakeFiles/glfw.dir/vulkan.c.s
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/monitor.c -o CMakeFiles/glfw.dir/monitor.c.s
 
 libraries/glfw/src/CMakeFiles/glfw.dir/window.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/window.c.o: ../libraries/glfw/src/window.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/window.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/window.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/window.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/window.c.o"
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/window.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/window.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/window.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/window.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/window.c > CMakeFiles/glfw.dir/window.c.i
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/window.c > CMakeFiles/glfw.dir/window.c.i
 
 libraries/glfw/src/CMakeFiles/glfw.dir/window.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/window.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/window.c -o CMakeFiles/glfw.dir/window.c.s
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/window.c -o CMakeFiles/glfw.dir/window.c.s
 
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o: ../libraries/glfw/src/x11_init.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/x11_init.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/x11_init.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_init.c.i: cmake_force
@@ -150,7 +137,7 @@ libraries/glfw/src/CMakeFiles/glfw.dir/x11_init.c.s: cmake_force
 
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o: ../libraries/glfw/src/x11_monitor.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/x11_monitor.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/x11_monitor.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.i: cmake_force
@@ -163,7 +150,7 @@ libraries/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.s: cmake_force
 
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o: ../libraries/glfw/src/x11_window.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/x11_window.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/x11_window.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/x11_window.c.i: cmake_force
@@ -176,7 +163,7 @@ libraries/glfw/src/CMakeFiles/glfw.dir/x11_window.c.s: cmake_force
 
 libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o: ../libraries/glfw/src/xkb_unicode.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/xkb_unicode.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/xkb_unicode.c
 
 libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.i: cmake_force
@@ -186,6 +173,19 @@ libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.i: cmake_force
 libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/xkb_unicode.c.s"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/xkb_unicode.c -o CMakeFiles/glfw.dir/xkb_unicode.c.s
+
+libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
+libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o: ../libraries/glfw/src/linux_joystick.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o"
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/linux_joystick.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/linux_joystick.c
+
+libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/linux_joystick.c.i"
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/linux_joystick.c > CMakeFiles/glfw.dir/linux_joystick.c.i
+
+libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/linux_joystick.c.s"
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/linux_joystick.c -o CMakeFiles/glfw.dir/linux_joystick.c.s
 
 libraries/glfw/src/CMakeFiles/glfw.dir/posix_time.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/posix_time.c.o: ../libraries/glfw/src/posix_time.c
@@ -200,18 +200,18 @@ libraries/glfw/src/CMakeFiles/glfw.dir/posix_time.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/posix_time.c.s"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/posix_time.c -o CMakeFiles/glfw.dir/posix_time.c.s
 
-libraries/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
-libraries/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o: ../libraries/glfw/src/posix_thread.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/posix_thread.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/posix_thread.c
+libraries/glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
+libraries/glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o: ../libraries/glfw/src/posix_tls.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o"
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/posix_tls.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/posix_tls.c
 
-libraries/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/posix_thread.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/posix_thread.c > CMakeFiles/glfw.dir/posix_thread.c.i
+libraries/glfw/src/CMakeFiles/glfw.dir/posix_tls.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/posix_tls.c.i"
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/posix_tls.c > CMakeFiles/glfw.dir/posix_tls.c.i
 
-libraries/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/posix_thread.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/posix_thread.c -o CMakeFiles/glfw.dir/posix_thread.c.s
+libraries/glfw/src/CMakeFiles/glfw.dir/posix_tls.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/posix_tls.c.s"
+	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/posix_tls.c -o CMakeFiles/glfw.dir/posix_tls.c.s
 
 libraries/glfw/src/CMakeFiles/glfw.dir/glx_context.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
 libraries/glfw/src/CMakeFiles/glfw.dir/glx_context.c.o: ../libraries/glfw/src/glx_context.c
@@ -226,63 +226,21 @@ libraries/glfw/src/CMakeFiles/glfw.dir/glx_context.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/glx_context.c.s"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/glx_context.c -o CMakeFiles/glfw.dir/glx_context.c.s
 
-libraries/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
-libraries/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o: ../libraries/glfw/src/egl_context.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/egl_context.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/egl_context.c
-
-libraries/glfw/src/CMakeFiles/glfw.dir/egl_context.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/egl_context.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/egl_context.c > CMakeFiles/glfw.dir/egl_context.c.i
-
-libraries/glfw/src/CMakeFiles/glfw.dir/egl_context.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/egl_context.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/egl_context.c -o CMakeFiles/glfw.dir/egl_context.c.s
-
-libraries/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
-libraries/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o: ../libraries/glfw/src/osmesa_context.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -o CMakeFiles/glfw.dir/osmesa_context.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/osmesa_context.c
-
-libraries/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/osmesa_context.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/osmesa_context.c > CMakeFiles/glfw.dir/osmesa_context.c.i
-
-libraries/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/osmesa_context.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -Wdeclaration-after-statement -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/osmesa_context.c -o CMakeFiles/glfw.dir/osmesa_context.c.s
-
-libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o: libraries/glfw/src/CMakeFiles/glfw.dir/flags.make
-libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o: ../libraries/glfw/src/linux_joystick.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/glfw.dir/linux_joystick.c.o   -c /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/linux_joystick.c
-
-libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/glfw.dir/linux_joystick.c.i"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/linux_joystick.c > CMakeFiles/glfw.dir/linux_joystick.c.i
-
-libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/glfw.dir/linux_joystick.c.s"
-	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/libraries/glfw/src/linux_joystick.c -o CMakeFiles/glfw.dir/linux_joystick.c.s
-
 # Object files for target glfw
 glfw_OBJECTS = \
 "CMakeFiles/glfw.dir/context.c.o" \
 "CMakeFiles/glfw.dir/init.c.o" \
 "CMakeFiles/glfw.dir/input.c.o" \
 "CMakeFiles/glfw.dir/monitor.c.o" \
-"CMakeFiles/glfw.dir/vulkan.c.o" \
 "CMakeFiles/glfw.dir/window.c.o" \
 "CMakeFiles/glfw.dir/x11_init.c.o" \
 "CMakeFiles/glfw.dir/x11_monitor.c.o" \
 "CMakeFiles/glfw.dir/x11_window.c.o" \
 "CMakeFiles/glfw.dir/xkb_unicode.c.o" \
+"CMakeFiles/glfw.dir/linux_joystick.c.o" \
 "CMakeFiles/glfw.dir/posix_time.c.o" \
-"CMakeFiles/glfw.dir/posix_thread.c.o" \
-"CMakeFiles/glfw.dir/glx_context.c.o" \
-"CMakeFiles/glfw.dir/egl_context.c.o" \
-"CMakeFiles/glfw.dir/osmesa_context.c.o" \
-"CMakeFiles/glfw.dir/linux_joystick.c.o"
+"CMakeFiles/glfw.dir/posix_tls.c.o" \
+"CMakeFiles/glfw.dir/glx_context.c.o"
 
 # External object files for target glfw
 glfw_EXTERNAL_OBJECTS =
@@ -291,21 +249,18 @@ libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/context.c.
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/init.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/input.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/monitor.c.o
-libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/window.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/x11_init.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/x11_monitor.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/x11_window.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/xkb_unicode.c.o
-libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/posix_time.c.o
-libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o
-libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/glx_context.c.o
-libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o
-libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/linux_joystick.c.o
+libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/posix_time.c.o
+libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/posix_tls.c.o
+libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/glx_context.c.o
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/build.make
 libraries/glfw/src/libglfw3.a: libraries/glfw/src/CMakeFiles/glfw.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Linking C static library libglfw3.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking C static library libglfw3.a"
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && $(CMAKE_COMMAND) -P CMakeFiles/glfw.dir/cmake_clean_target.cmake
 	cd /home/sreenivas/Desktop/jetpak/First_Game_JetPakCryRide/build/libraries/glfw/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/glfw.dir/link.txt --verbose=$(VERBOSE)
 
