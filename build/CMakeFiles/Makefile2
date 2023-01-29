@@ -114,7 +114,7 @@ libraries/glfw/src/clean: libraries/glfw/src/CMakeFiles/glfw.dir/clean
 CMakeFiles/glad.dir/all:
 	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/depend
 	$(MAKE) -f CMakeFiles/glad.dir/build.make CMakeFiles/glad.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=3,4 "Built target glad"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=4,5 "Built target glad"
 .PHONY : CMakeFiles/glad.dir/all
 
 # Build rule for subdir invocation for target.
@@ -138,16 +138,16 @@ CMakeFiles/glad.dir/clean:
 # Target rules for target CMakeFiles/app.dir
 
 # All Build rule for target.
-CMakeFiles/app.dir/all: libraries/glfw/src/CMakeFiles/glfw.dir/all
 CMakeFiles/app.dir/all: CMakeFiles/glad.dir/all
+CMakeFiles/app.dir/all: libraries/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/depend
 	$(MAKE) -f CMakeFiles/app.dir/build.make CMakeFiles/app.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=1,2 "Built target app"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=1,2,3 "Built target app"
 .PHONY : CMakeFiles/app.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/app.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles 18
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles 19
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/app.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles 0
 .PHONY : CMakeFiles/app.dir/rule
@@ -169,7 +169,7 @@ CMakeFiles/app.dir/clean:
 libraries/glfw/src/CMakeFiles/glfw.dir/all:
 	$(MAKE) -f libraries/glfw/src/CMakeFiles/glfw.dir/build.make libraries/glfw/src/CMakeFiles/glfw.dir/depend
 	$(MAKE) -f libraries/glfw/src/CMakeFiles/glfw.dir/build.make libraries/glfw/src/CMakeFiles/glfw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=5,6,7,8,9,10,11,12,13,14,15,16,17,18 "Built target glfw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles --progress-num=6,7,8,9,10,11,12,13,14,15,16,17,18,19 "Built target glfw"
 .PHONY : libraries/glfw/src/CMakeFiles/glfw.dir/all
 
 # Build rule for subdir invocation for target.

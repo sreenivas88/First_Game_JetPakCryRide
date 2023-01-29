@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/src/Shader.cpp" "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles/app.dir/src/Shader.cpp.o"
   "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/src/main.cpp" "/home/sreenivas/Desktop/game/First_Game_JetPakCryRide/build/CMakeFiles/app.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
