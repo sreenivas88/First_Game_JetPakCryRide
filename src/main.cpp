@@ -77,7 +77,6 @@ int randGenIntWithBound(int max){
  * * velicoty 
  * * motion 
  *  - rendering
- *  - texture
  * ! - colliions
  * ! - animation
  * ! - lighting 
@@ -173,6 +172,13 @@ int level(int level_number,Shader shader,GLFWwindow * window){
 		 1.0f, -1.0f,  0.0f,	0.6f, 1.0f, 0.2f,	1.0f, 0.0f,	// bottom right
 		 1.0f,  1.0f,  0.0f,	1.0f, 0.2f, 1.0f,	1.0f, 1.0f	// top right
 	};
+    float vertices_coin[] = {
+		// positions		// colors			// texture coordinates
+		-1.0f, -1.0f,  0.0f,	1.0f, 1.0f, 0.5f,	0.0f, 0.0f,	// bottom left
+		-1.0f,  1.0f,  0.0f,	0.5f, 1.0f, 0.75f,	0.0f, 1.0f,	// top left
+		 1.0f, -1.0f,  0.0f,	0.6f, 1.0f, 0.2f,	1.0f, 0.0f,	// bottom right
+		 1.0f,  1.0f,  0.0f,	1.0f, 0.2f, 1.0f,	1.0f, 1.0f	// top right
+	};
 	
     unsigned int indices[] = {
 		0, 1, 2, // first triangle
@@ -226,6 +232,38 @@ int level(int level_number,Shader shader,GLFWwindow * window){
 
         // put index array in EBO_ground
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_background);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+        // set attributes pointers
+        // position
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+        glEnableVertexAttribArray(0);
+        // color
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+        
+        // texture coordinate attribute
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+        glEnableVertexAttribArray(2);
+    }
+
+    // COIN
+    unsigned int VBO_coin, VAO_coin, EBO_coin;
+    {
+        // VBO, VAO_coin, EBO_ground
+        glGenBuffers(1, &VBO_coin);
+        glGenVertexArrays(1, &VAO_coin);
+        glGenBuffers(1, &EBO_coin);
+
+        // bind VAO_coin
+        glBindVertexArray(VAO_coin);
+
+        // bind VBO_coin
+        glBindBuffer(GL_ARRAY_BUFFER, VBO_coin);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices_coin), vertices_coin, GL_STATIC_DRAW);
+
+        // put index array in EBO_ground
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_coin);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
         // set attributes pointers
@@ -299,7 +337,7 @@ int level(int level_number,Shader shader,GLFWwindow * window){
         unsigned char* data = stbi_load("../src/assets/player_1.png", &width, &height, &nChannels, 0);
 
         if (data) {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
             glGenerateMipmap(GL_TEXTURE_2D);
         }
         else {
@@ -375,10 +413,45 @@ int level(int level_number,Shader shader,GLFWwindow * window){
         stbi_image_free(data);
     }
 
+    unsigned int texture_coin;
+    {
+        glGenTextures(1, &texture_coin);
+        glBindTexture(GL_TEXTURE_2D, texture_coin);
+
+        // image wrap (s, t, r) = (x, y, z)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+        // border color
+        float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+        glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+        // image filtering
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // scale up -> blend colors
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+
+        // load image 1
+        int width, height, nChannels;
+        stbi_set_flip_vertically_on_load(true);
+        unsigned char* data = stbi_load("../src/assets/coin_1.png", &width, &height, &nChannels, 0);
+
+        if (data) {
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
+        else {
+            std::cout << "Failed to load texture" << std::endl;
+        }
+
+        stbi_image_free(data);
+    }
+
+
 	shader.activate();
 	shader.setInt("texture_player", 0);
 	shader.setInt("texture_background", 1);
 	shader.setInt("texture_zap", 2);
+	shader.setInt("texture_coin", 3);
 
 
 
@@ -472,6 +545,28 @@ int level(int level_number,Shader shader,GLFWwindow * window){
 
         }
 
+        // !for coin motion and rendering texture and rendring 
+        {
+            // rending the entire length of the level
+            for (int i = 0 ; i < level_length ; i++){
+                // bind texture
+                // glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, texture_coin);
+                glBindVertexArray(0);
+
+                glm::mat4 trans = glm::mat4(1.0f);
+                trans = glm::translate(trans,glm::vec3(-1.0f * glfwGetTime() * level_speed  + (float)i*2 ,0.0f, 0.0f));
+                trans = glm::rotate(trans, glm::radians((float) zapper_position_rotation[i]), glm::vec3(0.0f, 0.0f, 1.0f));
+                trans = glm::scale(trans, glm::vec3(0.07f, 0.07f,1.0f));
+                shader.setMat4("transform", trans);
+
+                // draw shapes
+                glBindVertexArray(VAO_coin);
+                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+            }
+
+        }
+
 
 
 
@@ -501,7 +596,7 @@ int main() {
 	// openGL version 3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-
+	
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 # ifdef __APPLE__
