@@ -48,6 +48,7 @@ float set_time_zero = 0.0f;
 
 // random
 bool pause_game;
+float dev = 0.0;
 
 
 // level details
@@ -107,23 +108,22 @@ float coords_coin[4][2];
 float coords_zapper[4][2];
 
 // player coords
-void getPlayer4Coords()
-{
+void getPlayer4Coords(){
     // s(trans_x);
     // s(trans_y);
     // n();
 
-    coords_player[0][0]=trans_x+ 0.025f;
-    coords_player[0][1]=trans_y+ 0.050f;
+    coords_player[0][0]=trans_x+ 0.04f;
+    coords_player[0][1]=trans_y+ 0.05f;
 
-    coords_player[1][0]=trans_x- 0.025f;
-    coords_player[1][1]=trans_y+ 0.050f;
+    coords_player[1][0]=trans_x- 0.04f;
+    coords_player[1][1]=trans_y+ 0.05f - dev;
 
-    coords_player[2][0]=trans_x- 0.025f;
-    coords_player[2][1]=trans_y- 0.050f;
+    coords_player[2][0]=trans_x- 0.04f;
+    coords_player[2][1]=trans_y- 0.05f;
 
-    coords_player[3][0]=trans_x+ 0.025f;
-    coords_player[3][1]=trans_y- 0.050f;
+    coords_player[3][0]=trans_x+ 0.04f;
+    coords_player[3][1]=trans_y- 0.05f;
 
     if(0){
         s(coords_player[1][0]);s(coords_player[1][1]);s("---------");s(coords_player[0][0]);d(coords_player[0][1]);
@@ -139,17 +139,17 @@ void getZapper4Coords(float x,float y){
     // s(y);
     // n();
 
-    coords_zapper[0][0]=trans_x+ 0.05f;
-    coords_zapper[0][1]=trans_y+ 0.15f;
+    coords_zapper[0][0]=x+ 0.05f;
+    coords_zapper[0][1]=y+ 0.14f;
 
-    coords_zapper[1][0]=trans_x- 0.05f;
-    coords_zapper[1][1]=trans_y+ 0.15f;
+    coords_zapper[1][0]=x- 0.05f;
+    coords_zapper[1][1]=y+ 0.14f;
 
-    coords_zapper[2][0]=trans_x- 0.05f;
-    coords_zapper[2][1]=trans_y- 0.15f;
+    coords_zapper[2][0]=x- 0.05f;
+    coords_zapper[2][1]=y- 0.14f;
 
-    coords_zapper[3][0]=trans_x+ 0.05f;
-    coords_zapper[3][1]=trans_y- 0.15f;
+    coords_zapper[3][0]=x+ 0.05f;
+    coords_zapper[3][1]=y- 0.14f;
 
     if(0){
         s(coords_zapper[1][0]);s(coords_zapper[1][1]);s("---------");s(coords_zapper[0][0]);s(coords_zapper[0][1]);
@@ -165,17 +165,17 @@ void getCoin4Coords(float x,float y){
     // s(y);
     // n();
 
-    coords_coin[0][0]=x+ 0.035f;
-    coords_coin[0][1]=y+ 0.035f;
+    coords_coin[0][0]=x+ 0.02f;
+    coords_coin[0][1]=y+ 0.02f - dev;
 
-    coords_coin[1][0]=x- 0.035f;
-    coords_coin[1][1]=y+ 0.035f;
+    coords_coin[1][0]=x- 0.02f;
+    coords_coin[1][1]=y+ 0.02f - dev;
 
-    coords_coin[2][0]=x- 0.035f;
-    coords_coin[2][1]=y- 0.035f;
+    coords_coin[2][0]=x- 0.02f;
+    coords_coin[2][1]=y- 0.02f - dev;
 
-    coords_coin[3][0]=x+ 0.035f;
-    coords_coin[3][1]=y- 0.035f;
+    coords_coin[3][0]=x+ 0.02f;
+    coords_coin[3][1]=y- 0.02f - dev;
 
     if(0){
         s(coords_coin[1][0]);s(coords_coin[1][1]);s("---------");s(coords_coin[0][0]);d(coords_coin[0][1]);
@@ -193,21 +193,21 @@ bool isPointInsideRect(float quad[4][2],float x,float y) {
     d4 = - (x - quad[0][0]) * (quad[3][1] - quad[0][1]) + (quad[3][0] - quad[0][0]) * (y - quad[0][1]);
 
     // n();
-    bool flag = (d1 * d3 <= 0.0000)  && (d4 * d2 <= 0.0000) ;
+    bool flag =(d1 > 0 && d2 > 0 && d3 > 0 && d4 > 0) || (d1 < 0 && d2 < 0 && d3 < 0 && d4 < 0); ;
     if(flag){
-        s(d1 * d3);s(d2 * d4);
+        // s(d1 * d3);s(d2 * d4);
         d("-----------------------------------------------");
-        s(x);d(y);
-        for (size_t i = 0; i < 4; i++)
-        {
-            for (size_t j = 0; j < 2; j++)
-            {
-                /* code */
-                std::cout << quad[i][j] <<"," ;
-            }
-            std::cout << "|" ;
-        }
-        std::cout << "\n" ;
+        // s(x);d(y);
+        // for (size_t i = 0; i < 4; i++)
+        // {
+        //     for (size_t j = 0; j < 2; j++)
+        //     {
+        //         /* code */
+        //         std::cout << quad[i][j] <<"," ;
+        //     }
+        //     std::cout << "|" ;
+        // }
+        // std::cout << "\n" ;
         d("-----------------------------------------------");
         n();
     }
@@ -216,6 +216,30 @@ bool isPointInsideRect(float quad[4][2],float x,float y) {
 
 bool collisionDetect(float quad1[4][2],float quad2[4][2]){
     // for point of quad 1 in quad 2
+    
+    if(1){
+        for (size_t i = 0; i < 4; i++)
+        {
+            for (size_t j = 0; j < 2; j++)
+            {
+                /* code */
+                std::cout << quad1[i][j] <<" " ;
+            }
+            std::cout << "\t" ;
+        }
+        std::cout << "\n" ;
+        for (size_t i = 0; i < 4; i++)
+        {
+            for (size_t j = 0; j < 2; j++)
+            {
+                /* code */
+                std::cout << quad2[i][j] <<" " ;
+            }
+            std::cout << "\t" ;
+        }
+        std::cout << "\n" ;
+    }
+
     bool is_inside_2 = false;
     for (size_t i = 0; i < 4; i++)
     {
@@ -235,7 +259,7 @@ bool collisionDetect(float quad1[4][2],float quad2[4][2]){
 
     // d((is_inside_2 || is_inside_1));
 
-    return is_inside_2 || is_inside_1;
+    return is_inside_2 && is_inside_1;
 }
 
 bool checkCoinCollision(int i,float y,float time){
@@ -1362,7 +1386,7 @@ int level(int level_number,Shader shader,GLFWwindow * window){
                 // transformation
                 glm::mat4 trans = glm::mat4(1.0f);
                 trans = glm::translate(trans,glm::vec3(-1.0f * glfwGetTime() * level_speed  + (float)i*2 ,0.0f, 0.0f));
-                trans = glm::scale(trans, glm::vec3(1.0f, 1.0f,1.0f));
+                // trans = glm::scale(trans, glm::vec3(1.0f, 1.0f,1.0f));
                 shader.setMat4("transform", trans);
 
                 // draw shapes
