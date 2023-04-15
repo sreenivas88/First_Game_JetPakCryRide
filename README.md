@@ -1,6 +1,6 @@
-# OpenGL boilerplate
+# Jet Pack Cry🥲 Ride
 
-## Contents
+## Setup
 - glfw, glad and glm built from source in `libraries`
 
 - Standard shader class from learnopengl.com and stb_image.h in `include`
@@ -23,5 +23,9 @@
         - Windows
             - Use [this video](https://www.youtube.com/watch?v=qW_8Dyq2asc) if using VSCode (I hope you aren't)
 
-2. `mkdir build; cd build`
+2. `mkdir build; cd build` (if build folder already exists delete it including the contents)
 3. `cmake ..; make`
+
+## How to run
+
+write the followning in the terminal `./app`
